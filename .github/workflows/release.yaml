@@ -20,7 +20,11 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Run Builder
-        run: echo dummy-step
+        run: docker build . -t localhost.localdomain/builder:latest -f Dockerfile
+
+      - name: Build RPM
+        run: |
+          docker run -v ./RPMS:/root/rpmbuild/RPMS -rm --name builder make
 
       - name: List packaged files
         run: ls -lhR RPMS/
