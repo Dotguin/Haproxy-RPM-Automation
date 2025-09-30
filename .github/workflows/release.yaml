@@ -19,12 +19,19 @@ jobs:
       - name: Setup docker buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Run Builder
-        run: docker build . -t localhost.localdomain/builder:latest -f Dockerfile
+      - name: Run EL8 Builder
+        run: docker build . --build-arg OS=el8 --build-arg BUILDER=public.ecr.aws/s0b5c6b7/builder/rpm:8.10-20250930 -t localhost.localdomain/builder:el8 -f Dockerfile
 
-      - name: Build RPM
+      - name: Build EL8 RPM
         run: |
-          docker run -v ./RPMS:/root/rpmbuild/RPMS --name builder localhost.localdomain/builder:latest make
+          docker run -v ./RPMS:/root/rpmbuild/RPMS --name builder localhost.localdomain/builder:el8 make
+      
+      - name: Run EL9 Builder
+        run: docker build . -t localhost.localdomain/builder:el9 -f Dockerfile
+
+      - name: Build EL9 RPM
+        run: |
+          docker run -v ./RPMS:/root/rpmbuild/RPMS --name builder localhost.localdomain/builder:el9 make
 
       - name: List packaged files
         run: ls -lhR RPMS/
