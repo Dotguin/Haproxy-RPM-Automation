@@ -24,14 +24,14 @@ jobs:
 
       - name: Build EL8 RPM
         run: |
-          docker run -v ./RPMS:/root/rpmbuild/RPMS --name builder localhost.localdomain/builder:el8 make
+          docker run -v ./RPMS:/root/rpmbuild/RPMS --name builder8 localhost.localdomain/builder:el8 make
       
       - name: Run EL9 Builder
         run: docker build . -t localhost.localdomain/builder:el9 -f Dockerfile
 
       - name: Build EL9 RPM
         run: |
-          docker run -v ./RPMS:/root/rpmbuild/RPMS --name builder localhost.localdomain/builder:el9 make
+          docker run -v ./RPMS:/root/rpmbuild/RPMS --name builder9 localhost.localdomain/builder:el9 make
 
       - name: List packaged files
         run: ls -lhR RPMS/
