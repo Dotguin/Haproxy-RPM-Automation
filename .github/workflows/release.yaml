@@ -24,7 +24,7 @@ jobs:
 
       - name: Build RPM
         run: |
-          docker run -v ./RPMS:/root/rpmbuild/RPMS -rm --name builder localhost.localdomain/builder:latest make
+          docker run -v ./RPMS:/root/rpmbuild/RPMS --name builder localhost.localdomain/builder:latest make
 
       - name: List packaged files
         run: ls -lhR RPMS/
