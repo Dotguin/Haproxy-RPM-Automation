@@ -1,4 +1,4 @@
-ARG BUILDER=public.ecr.aws/s0b5c6b7/builder/rpm:9.6-20250929
+ARG BUILDER=public.ecr.aws/s0b5c6b7/builder/rpm:9.7-20260225
 
 FROM ${BUILDER}
 
